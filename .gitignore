@@ -1,0 +1,13 @@
+# Default ignored files
+/.idea/
+/target/
+/rpc-framework-core/target/
+/rpc-framework-common/target/
+/rpc-framework-core/rpc-framework-core.iml
+/rpc-framework-common/rpc-framework-common.iml
+/rpc-server/rpc-server.iml
+/.settings
+*/.settings
+.classpath
+.project
+.DS_Store
