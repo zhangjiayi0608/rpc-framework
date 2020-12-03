@@ -11,8 +11,11 @@ import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.imps.CuratorFrameworkState;
 import org.apache.curator.retry.ExponentialBackoffRetry;
+import org.apache.zookeeper.CreateMode;
 
 import github.zjy.utils.PropertiesFileUtil;
+import lombok.extern.slf4j.Slf4j;
+
 
 /**
  * @ClassName CuratorUtils
@@ -20,6 +23,7 @@ import github.zjy.utils.PropertiesFileUtil;
  * @Author zhangjiayi07
  * @Date 2020/12/3 下午4:50
  **/
+@Slf4j
 public class CuratorUtils {
     private static final Properties ZK_PROPERTY = PropertiesFileUtil.readPropertiesFile("zk.properties");
     private static final int SLEEP_TIME = Integer.valueOf(ZK_PROPERTY.getProperty("zk.sleep.time"));
@@ -49,5 +53,25 @@ public class CuratorUtils {
                 .build();
         zkClient.start();
         return zkClient;
+    }
+
+    /**
+     * 创建一个临时节点
+     * @param client
+     * @param path
+     */
+    public static void createEphemeralNode(CuratorFramework client, String path) {
+        try {
+            if (REGISTERED_PATH_SET.contains(path) || client.checkExists().forPath(path) != null) {
+                log.info("The node already exists. The node is:[{}]", path);
+            } else {
+                client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL).forPath(path);
+                log.info("The node is created successfully. The node is [{}]", path);
+            }
+            REGISTERED_PATH_SET.add(path);
+        } catch (Exception e) {
+            log.error("create persistent node for path [{}] fail ", path);
+        }
+
     }
 }
