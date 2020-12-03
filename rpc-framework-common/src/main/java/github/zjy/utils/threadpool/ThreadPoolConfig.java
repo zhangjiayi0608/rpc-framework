@@ -1,4 +1,4 @@
-package utils.threadpool;
+package github.zjy.utils.threadpool;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;

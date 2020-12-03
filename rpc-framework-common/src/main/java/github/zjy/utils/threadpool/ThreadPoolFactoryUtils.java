@@ -1,4 +1,4 @@
-package utils.threadpool;
+package github.zjy.utils.threadpool;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
