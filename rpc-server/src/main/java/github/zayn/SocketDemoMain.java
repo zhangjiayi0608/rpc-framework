@@ -3,9 +3,7 @@ package github.zayn;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import github.zayn.annotation.RpcPackageScan;
-import github.zayn.provider.HelloServiceImpl;
 import github.zayn.remoting.socket.SocketRpcServer;
-import github.zayn.service.HelloService;
 
 /**
  * @ClassName SocketDemoMain
@@ -19,7 +17,6 @@ public class SocketDemoMain {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SocketDemoMain.class);
         SocketRpcServer socketRpcServer = (SocketRpcServer) applicationContext.getBean(
                 "socketRpcServer");
-        HelloService helloService = new HelloServiceImpl();
         socketRpcServer.start();
     }
 }
