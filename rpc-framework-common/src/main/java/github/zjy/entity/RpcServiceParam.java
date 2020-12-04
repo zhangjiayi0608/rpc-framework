@@ -30,6 +30,6 @@ public class RpcServiceParam {
     private String group;
 
     public String toRpcServiceName() {
-        return this.getServiceName() + this.getGroup() + this.getVersion();
+        return this.getServiceName() + "/" + this.getGroup() + "/" + this.getVersion();
     }
 }
