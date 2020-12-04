@@ -11,6 +11,7 @@ import github.zjy.entity.RpcServiceParam;
 import github.zjy.enums.RemoteTypeEnum;
 import github.zjy.factory.SingletonFactory;
 import github.zjy.registry.ServiceRegister;
+import github.zjy.registry.impl.ServiceRegisterImpl;
 import github.zjy.remoting.netty.NettyRpcServer;
 import github.zjy.remoting.socket.SocketRpcServer;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +37,7 @@ public class ServiceProviderImpl implements ServiceProvider {
     private static final int DEFAULT_PORT = 9998;
 
     public ServiceProviderImpl() {
-        this.serviceRegister = SingletonFactory.getInstance(ServiceRegister.class);
+        this.serviceRegister = SingletonFactory.getInstance(ServiceRegisterImpl.class);
         this.serviceMap = new ConcurrentHashMap<>();
         this.registeredServiceSet = ConcurrentHashMap.newKeySet();
     }

@@ -5,6 +5,7 @@
 /rpc-framework-common/target/
 /rpc-framework-core/rpc-framework-core.iml
 /rpc-framework-common/rpc-framework-common.iml
+/rpc-sdk/rpc-sdk.iml
 /rpc-server/rpc-server.iml
 /.settings
 */.settings

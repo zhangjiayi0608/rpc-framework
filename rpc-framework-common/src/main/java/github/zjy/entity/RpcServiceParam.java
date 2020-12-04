@@ -1,6 +1,7 @@
 package github.zjy.entity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -15,6 +16,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class RpcServiceParam {
     /**
      * serviceName
@@ -30,6 +32,6 @@ public class RpcServiceParam {
     private String group;
 
     public String toRpcServiceName() {
-        return this.getServiceName() + "/" + this.getGroup() + "/" + this.getVersion();
+        return this.getServiceName() + "_" + this.getGroup() + "_" + this.getVersion();
     }
 }

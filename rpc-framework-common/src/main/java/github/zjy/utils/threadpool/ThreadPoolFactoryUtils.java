@@ -48,15 +48,19 @@ public final class ThreadPoolFactoryUtils {
                 threadFactory);
     }
 
-    public static ExecutorService createThreadPoolIfAbsent(ThreadPoolConfig customThreadPoolConfig, String threadName, Boolean isDaemon) {
-        ExecutorService executorService = THREAD_POOLS.computeIfAbsent(threadName, k -> createThreadPool(customThreadPoolConfig,
-                threadName, isDaemon));
+    public static ExecutorService createThreadPoolIfAbsent(ThreadPoolConfig threadPoolConfig, String threadName, Boolean isDaemon) {
+        ExecutorService executorService = THREAD_POOLS.
+                computeIfAbsent(threadName, k -> createThreadPool(threadPoolConfig, threadName, isDaemon));
         //如果被shutdown的话，就移除重建
         if (executorService.isShutdown() || executorService.isTerminated()) {
             THREAD_POOLS.remove(threadName);
-            ExecutorService threadPool = createThreadPool(customThreadPoolConfig, threadName, isDaemon);
+            ExecutorService threadPool = createThreadPool(threadPoolConfig, threadName, isDaemon);
             THREAD_POOLS.put(threadName, threadPool);
         }
         return executorService;
+    }
+
+    public static ExecutorService createThreadPoolIfAbsent(String threadName) {
+        return createThreadPoolIfAbsent(new ThreadPoolConfig(), threadName, false);
     }
 }

@@ -30,6 +30,8 @@
         <module>rpc-framework-core</module>
         <module>rpc-framework-common</module>
         <module>rpc-server</module>
+        <module>rpc-sdk</module>
+
     </modules>
     <dependencies>
         <!-- lombok -->
