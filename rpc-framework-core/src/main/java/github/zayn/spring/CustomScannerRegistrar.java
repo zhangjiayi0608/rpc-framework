@@ -9,7 +9,6 @@ import org.springframework.core.type.AnnotationMetadata;
 import org.springframework.core.type.StandardAnnotationMetadata;
 import org.springframework.stereotype.Component;
 
-
 import github.zayn.annotation.RpcPackageScan;
 import github.zayn.annotation.RpcService;
 import lombok.extern.slf4j.Slf4j;

@@ -9,10 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-/**
- * @author shuang.kou
- * @createTime 2020年05月10日 08:24:00
- */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

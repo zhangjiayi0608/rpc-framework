@@ -15,8 +15,7 @@ import github.zayn.remoting.socket.SocketRpcServer;
 public class SocketDemoMain {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SocketDemoMain.class);
-        SocketRpcServer socketRpcServer = (SocketRpcServer) applicationContext.getBean(
-                "socketRpcServer");
+        SocketRpcServer socketRpcServer = (SocketRpcServer) applicationContext.getBean("socketRpcServer");
         socketRpcServer.start();
     }
 }
