@@ -2,6 +2,7 @@ package github.zayn.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.UUID;
 
 import github.zayn.entity.RpcServiceParam;
@@ -26,6 +27,10 @@ public class RpcClientProxy implements InvocationHandler {
         this.rpcServiceParam = rpcServiceParam;
     }
 
+    public <T> T getProxy(Class<T> clazz) {
+        return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[]{clazz}, this);
+    }
+
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -34,7 +39,7 @@ public class RpcClientProxy implements InvocationHandler {
                 .interfaceName(method.getDeclaringClass().getName())
                 .methodName(method.getName())
                 .paramTypes(method.getParameterTypes())
-                .parameters(method.getTypeParameters())
+                .parameters(args)
                 .requestId(UUID.randomUUID().toString())
                 .group(rpcServiceParam.getGroup())
                 .version(rpcServiceParam.getVersion()).build();

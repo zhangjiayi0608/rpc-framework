@@ -59,7 +59,8 @@ public class ServiceProviderImpl implements ServiceProvider {
     }
 
     public Object getService(RpcServiceParam param) {
-        return null;
+        Object service = serviceMap.get(param.toRpcServiceName());
+        return service;
     }
 
     public void publishService(Object service, RpcServiceParam param, RemoteTypeEnum remoteTypeEnum) {
@@ -86,7 +87,7 @@ public class ServiceProviderImpl implements ServiceProvider {
                 default:
                     port = DEFAULT_PORT;
             }
-            serviceRegister.registerService(serviceName, new InetSocketAddress(hostAddress, port));
+            serviceRegister.registerService(param.toRpcServiceName(), new InetSocketAddress(hostAddress, port));
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }

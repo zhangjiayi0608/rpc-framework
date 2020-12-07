@@ -7,6 +7,7 @@
 /rpc-framework-common/rpc-framework-common.iml
 /rpc-sdk/rpc-sdk.iml
 /rpc-server/rpc-server.iml
+/rpc-client/rpc-client.iml
 /.settings
 */.settings
 .classpath

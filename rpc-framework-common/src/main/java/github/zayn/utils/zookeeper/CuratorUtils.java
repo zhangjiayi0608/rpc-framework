@@ -10,6 +10,8 @@ import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.imps.CuratorFrameworkState;
+import org.apache.curator.framework.recipes.cache.PathChildrenCache;
+import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.zookeeper.CreateMode;
 
@@ -72,6 +74,37 @@ public class CuratorUtils {
         } catch (Exception e) {
             log.error("create persistent node for path [{}] fail ", path);
         }
+    }
 
+    public static List<String> getChildNodeList(CuratorFramework client, String rpcServiceName) {
+        if (SERVICE_ADDRESS_MAP.containsKey(rpcServiceName)) {
+            return SERVICE_ADDRESS_MAP.get(rpcServiceName);
+        }
+        List<String> result = null;
+        String servicePath = ZK_REGISTER_ROOT_PATH + "/" + rpcServiceName;
+        try {
+            result = client.getChildren().forPath(servicePath);
+            SERVICE_ADDRESS_MAP.put(rpcServiceName, result);
+            registerWatcher(rpcServiceName, client);
+        } catch (Exception e) {
+            log.error("get children nodes for path [{}] fail", servicePath);
+        }
+        return result;
+    }
+
+    /**
+     * Registers to listen for changes to the specified node
+     *
+     * @param rpcServiceName rpc service name eg:github.javaguide.HelloServicetest2version
+     */
+    private static void registerWatcher(String rpcServiceName, CuratorFramework client) throws Exception {
+        String servicePath = ZK_REGISTER_ROOT_PATH + "/" + rpcServiceName;
+        PathChildrenCache pathChildrenCache = new PathChildrenCache(client, servicePath, true);
+        PathChildrenCacheListener pathChildrenCacheListener = (curatorFramework, pathChildrenCacheEvent) -> {
+            List<String> serviceAddresses = curatorFramework.getChildren().forPath(servicePath);
+            SERVICE_ADDRESS_MAP.put(rpcServiceName, serviceAddresses);
+        };
+        pathChildrenCache.getListenable().addListener(pathChildrenCacheListener);
+        pathChildrenCache.start();
     }
 }

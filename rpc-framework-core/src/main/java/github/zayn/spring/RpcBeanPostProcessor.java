@@ -61,11 +61,12 @@ public class RpcBeanPostProcessor implements BeanPostProcessor {
                 RpcServiceParam param = RpcServiceParam.builder()
                         .group(rpcReference.group())
                         .version(rpcReference.version()).build();
-                RpcClientProxy rpcClientData = new RpcClientProxy(rpcClient, param);
+                RpcClientProxy rpcClientProxy = new RpcClientProxy(rpcClient, param);
+                Object clientProxy = rpcClientProxy.getProxy(declaredField.getType());
                 //取消java对类的权限控制
                 declaredField.setAccessible(true);
                 try {
-                    declaredField.set(bean, rpcClientData);
+                    declaredField.set(bean, clientProxy);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
