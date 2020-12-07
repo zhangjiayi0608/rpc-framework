@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import github.zayn.entity.RpcServiceParam;
 import github.zayn.model.RpcRequest;
+import github.zayn.model.RpcResponse;
 import github.zayn.remoting.RpcClient;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,7 +38,7 @@ public class RpcClientProxy implements InvocationHandler {
                 .requestId(UUID.randomUUID().toString())
                 .group(rpcServiceParam.getGroup())
                 .version(rpcServiceParam.getVersion()).build();
-
-        return null;
+        RpcResponse<Object> response = (RpcResponse<Object>) rpcClient.sendRpcRequest(rpcRequest);
+        return response.getData();
     }
 }

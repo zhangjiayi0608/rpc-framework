@@ -13,6 +13,7 @@ import github.zayn.enums.RemoteTypeEnum;
 import github.zayn.factory.SingletonFactory;
 import github.zayn.provider.ServiceProvider;
 import github.zayn.provider.ServiceProviderImpl;
+import github.zayn.proxy.RpcClientProxy;
 import github.zayn.remoting.RpcClient;
 import github.zayn.remoting.socket.SocketRpcClient;
 import lombok.extern.slf4j.Slf4j;
@@ -60,6 +61,14 @@ public class RpcBeanPostProcessor implements BeanPostProcessor {
                 RpcServiceParam param = RpcServiceParam.builder()
                         .group(rpcReference.group())
                         .version(rpcReference.version()).build();
+                RpcClientProxy rpcClientData = new RpcClientProxy(rpcClient, param);
+                //取消java对类的权限控制
+                declaredField.setAccessible(true);
+                try {
+                    declaredField.set(bean, rpcClientData);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
 
 
             }
