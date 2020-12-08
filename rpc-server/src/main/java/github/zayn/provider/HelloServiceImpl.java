@@ -23,8 +23,10 @@ public class HelloServiceImpl implements HelloService {
     @Override
     public String sayHello(Hello hello) {
         log.info("HelloServiceImpl收到客户端message: {}.", hello.getMessage());
+        System.out.println("HelloServiceImpl收到客户端message: [" + hello.getMessage() + "]");
         String result = "Hello description is " + hello.getDescription();
         log.info("HelloServiceImpl返回: {}.", result);
+        System.out.println("HelloServiceImpl返回:[" + result + "]");
         return result;
     }
 }

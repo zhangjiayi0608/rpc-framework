@@ -22,9 +22,11 @@ public class ServiceDiscoverImpl implements ServiceDiscover {
         CuratorFramework zkClient = CuratorUtils.getZkClient();
         List<String> serviceUrlList = CuratorUtils.getChildNodeList(zkClient, serviceName);
         //TODO 后期负载均衡  现在的逻辑是随机打到不同的IP地址中
+        //lowB代码Start
         Random random = new Random();
         int nextInt = random.nextInt(serviceUrlList.size());
         String serviceUrl = serviceUrlList.get(nextInt);
+        //lowB代码End
         log.info("service address:[{}]", serviceUrl);
         String[] socketAddressArray = serviceUrl.split(":");
         String host = socketAddressArray[0];
