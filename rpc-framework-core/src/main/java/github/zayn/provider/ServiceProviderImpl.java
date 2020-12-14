@@ -12,7 +12,7 @@ import github.zayn.enums.RemoteTypeEnum;
 import github.zayn.factory.SingletonFactory;
 import github.zayn.registry.ServiceRegister;
 import github.zayn.registry.impl.ServiceRegisterImpl;
-import github.zayn.remoting.netty.NettyRpcServer;
+import github.zayn.remoting.netty.server.NettyRpcServer;
 import github.zayn.remoting.socket.SocketRpcServer;
 import lombok.extern.slf4j.Slf4j;
 
