@@ -68,7 +68,7 @@ public class ServiceProviderImpl implements ServiceProvider {
             //获取本机ip
             String hostAddress = InetAddress.getLocalHost().getHostAddress();
             //反射获取当前对象的第一个接口
-            //TODO 如果接口多继承怎么办？
+            //TODO 如果接口多继承怎么办？虽然绝对不会那么搞
             Class<?> firstInterface = service.getClass().getInterfaces()[0];
             String serviceName = firstInterface.getCanonicalName();
             param.setServiceName(serviceName);
