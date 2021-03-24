@@ -32,7 +32,8 @@ public class SocketRpcClient implements RpcClient {
                 RpcServiceParam.builder()
                         .serviceName(rpcRequest.getInterfaceName())
                         .group(rpcRequest.getGroup())
-                        .version(rpcRequest.getVersion()).build();
+                        .version(rpcRequest.getVersion())
+                        .build();
         String serviceName = param.toRpcServiceName();
         InetSocketAddress inetSocketAddress = serviceDiscover.discoverService(serviceName);
         Socket socket = new Socket();

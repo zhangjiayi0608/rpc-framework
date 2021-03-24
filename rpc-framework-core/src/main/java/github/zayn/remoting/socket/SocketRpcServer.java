@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutorService;
 
 import org.springframework.stereotype.Component;
 
+import github.zayn.model.RpcContext;
 import github.zayn.utils.threadpool.ThreadPoolFactoryUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,10 +38,13 @@ public class SocketRpcServer {
             while ((socket = serverSocket.accept()) != null) {
                 log.info("client connected [{}]", socket.getInetAddress());
                 threadPool.execute(new SocketRpcRequestHandlerRunnable(socket));
+                RpcContext.clear();
             }
             threadPool.shutdown();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            RpcContext.clear();
         }
     }
 

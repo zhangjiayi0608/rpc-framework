@@ -2,6 +2,7 @@ package github.zayn.provider;
 
 import github.zayn.annotation.RpcService;
 import github.zayn.model.Hello;
+import github.zayn.model.RpcContext;
 import github.zayn.service.HelloService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,6 +28,8 @@ public class HelloServiceImpl implements HelloService {
         String result = "Hello description is " + hello.getDescription();
         log.info("HelloServiceImpl返回: {}.", result);
         System.out.println("HelloServiceImpl返回:[" + result + "]");
+        String s = RpcContext.traceId();
+        System.out.println(s);
         return result;
     }
 }

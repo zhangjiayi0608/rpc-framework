@@ -40,7 +40,7 @@ public class RpcClientProxy implements InvocationHandler {
                 .methodName(method.getName())
                 .paramTypes(method.getParameterTypes())
                 .parameters(args)
-                .requestId(UUID.randomUUID().toString())
+                .traceId(UUID.randomUUID().toString())
                 .group(rpcServiceParam.getGroup())
                 .version(rpcServiceParam.getVersion()).build();
         RpcResponse<Object> response = (RpcResponse<Object>) rpcClient.sendRpcRequest(rpcRequest);

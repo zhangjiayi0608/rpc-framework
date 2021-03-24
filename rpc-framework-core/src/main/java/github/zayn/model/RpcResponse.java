@@ -23,7 +23,7 @@ import lombok.ToString;
 public class RpcResponse<T> implements Serializable {
 
     private static final long serialVersionUID = 715745410605631233L;
-    private String requestId;
+    private String traceId;
     /**
      * response code
      */
@@ -37,11 +37,11 @@ public class RpcResponse<T> implements Serializable {
      */
     private T data;
 
-    public static <T> RpcResponse<T> success(T data, String requestId) {
+    public static <T> RpcResponse<T> success(T data, String traceId) {
         RpcResponse<T> response = new RpcResponse<>();
         response.setCode(RpcResponseCodeEnum.SUCCESS.getCode());
         response.setMessage(RpcResponseCodeEnum.SUCCESS.getMessage());
-        response.setRequestId(requestId);
+        response.setTraceId(traceId);
         if (null != data) {
             response.setData(data);
         }

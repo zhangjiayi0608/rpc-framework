@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 import github.zayn.factory.SingletonFactory;
+import github.zayn.model.RpcContext;
 import github.zayn.model.RpcRequest;
 import github.zayn.model.RpcResponse;
 import github.zayn.remoting.handler.RpcRequestHandler;
@@ -35,7 +36,9 @@ public class SocketRpcRequestHandlerRunnable implements Runnable {
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream())) {
             RpcRequest rpcRequest = (RpcRequest) objectInputStream.readObject();
             Object result = rpcRequestHandler.handle(rpcRequest);
-            objectOutputStream.writeObject(RpcResponse.success(result, rpcRequest.getRequestId()));
+            RpcContext.init();
+            RpcContext.setTraceId(rpcRequest.getTraceId());
+            objectOutputStream.writeObject(RpcResponse.success(result, rpcRequest.getTraceId()));
             objectOutputStream.flush();
         } catch (IOException | ClassNotFoundException e) {
             log.error("occur exception:", e);
