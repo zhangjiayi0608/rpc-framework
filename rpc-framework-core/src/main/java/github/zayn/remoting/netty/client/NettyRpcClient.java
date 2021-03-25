@@ -1,7 +1,13 @@
 package github.zayn.remoting.netty.client;
 
 
+import java.net.InetSocketAddress;
+import java.util.concurrent.CompletableFuture;
+
+import github.zayn.factory.SingletonFactory;
 import github.zayn.model.RpcRequest;
+import github.zayn.model.RpcResponse;
+import github.zayn.registry.ServiceDiscover;
 import github.zayn.remoting.RpcClient;
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,8 +20,18 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public final class NettyRpcClient implements RpcClient {
 
+    private final ServiceDiscover serviceDiscover;
+
+    public NettyRpcClient() {
+        this.serviceDiscover = SingletonFactory.getInstance(ServiceDiscover.class);
+    }
+
     @Override
     public Object sendRpcRequest(RpcRequest rpcRequest) {
+        CompletableFuture<RpcResponse<Object>> responseFuture = new CompletableFuture<>();
+        String serviceName = rpcRequest.toRpcParams().getServiceName();
+        InetSocketAddress inetSocketAddress = serviceDiscover.discoverService(serviceName);
+
         return null;
     }
 }

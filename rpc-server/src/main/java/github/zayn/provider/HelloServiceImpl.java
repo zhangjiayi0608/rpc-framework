@@ -16,8 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 @RpcService(group = "group1", version = "version1")
 public class HelloServiceImpl implements HelloService {
 
+    //test代码块，用来看Bean是否被创建
     static {
-        System.out.println("HelloServiceImpl已经被创建！");
         log.info("HelloServiceImpl已经被创建！");
     }
 

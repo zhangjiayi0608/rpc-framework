@@ -7,8 +7,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 
-import org.springframework.stereotype.Component;
-
 import github.zayn.model.RpcContext;
 import github.zayn.utils.threadpool.ThreadPoolFactoryUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
  * @Date 2020/12/4 上午10:24
  **/
 @Slf4j
-@Component
 public class SocketRpcServer {
     public static final int PORT = 9998;
     private final ExecutorService threadPool;

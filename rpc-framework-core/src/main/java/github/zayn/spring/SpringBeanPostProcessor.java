@@ -26,12 +26,12 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 @Component
-public class RpcBeanPostProcessor implements BeanPostProcessor {
+public class SpringBeanPostProcessor implements BeanPostProcessor {
 
     private final ServiceProvider serviceProvider;
     private final RpcClient rpcClient;
 
-    public RpcBeanPostProcessor() {
+    public SpringBeanPostProcessor() {
         serviceProvider = SingletonFactory.getInstance(ServiceProviderImpl.class);
         rpcClient = SingletonFactory.getInstance(SocketRpcClient.class);
     }
