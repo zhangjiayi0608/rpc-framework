@@ -11,8 +11,9 @@ import github.zayn.client.HelloClient;
  * @Author zhangjiayi07
  * @Date 2020/12/7 下午3:24
  **/
-@RpcPackageScan(basePackage = "github.zayn")
+@RpcPackageScan(basePackage = {})
 public class SocketClientDemo {
+
     public static void main(String[] args) throws InterruptedException {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(SocketClientDemo.class);
         HelloClient helloClient = (HelloClient) applicationContext.getBean("helloClient");

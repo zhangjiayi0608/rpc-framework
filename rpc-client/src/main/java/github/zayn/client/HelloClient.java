@@ -1,6 +1,6 @@
 package github.zayn.client;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import github.zayn.annotation.RpcReference;
 import github.zayn.model.Hello;
@@ -12,7 +12,7 @@ import github.zayn.service.HelloService;
  * @Author zhangjiayi07
  * @Date 2020/12/7 下午3:14
  **/
-@Service
+@Component
 public class HelloClient {
 
     @RpcReference(version = "version1", group = "group1")

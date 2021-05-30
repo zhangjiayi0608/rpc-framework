@@ -20,6 +20,11 @@ public class CustomScannerRegistrar implements ImportBeanDefinitionRegistrar, Re
     private static final String BASE_PACKAGE_ATTRIBUTE_NAME = "basePackage";
     private ResourceLoader resourceLoader;
 
+
+    /**
+     * 获取资源
+     * @param resourceLoader
+     */
     @Override
     public void setResourceLoader(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
@@ -28,7 +33,6 @@ public class CustomScannerRegistrar implements ImportBeanDefinitionRegistrar, Re
 
     @Override
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) {
-        //get the attributes and values ​​of RpcScan annotation
         AnnotationAttributes rpcScanAnnotationAttributes =
                 AnnotationAttributes.fromMap(annotationMetadata.getAnnotationAttributes(RpcPackageScan.class.getName()));
         String[] rpcScanBasePackages = new String[0];
@@ -41,7 +45,7 @@ public class CustomScannerRegistrar implements ImportBeanDefinitionRegistrar, Re
         }
         // Scan the RpcService annotation
         CustomScanner rpcServiceScanner = new CustomScanner(beanDefinitionRegistry, RpcService.class);
-        // Scan the Component annotation
+        // Scan the Component annotation from spring package
         CustomScanner springBeanScanner = new CustomScanner(beanDefinitionRegistry, Component.class);
         if (resourceLoader != null) {
             rpcServiceScanner.setResourceLoader(resourceLoader);

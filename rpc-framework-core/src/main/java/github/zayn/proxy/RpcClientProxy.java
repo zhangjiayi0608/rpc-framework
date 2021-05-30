@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @ClassName RpcClientProxy
- * @DESCRIPTION TODO
+ * @DESCRIPTION 继承InvocationHandler的代理类
  * @Author zhangjiayi07
  * @Date 2020/12/5 下午5:44
  **/
@@ -27,6 +27,14 @@ public class RpcClientProxy implements InvocationHandler {
         this.rpcServiceParam = rpcServiceParam;
     }
 
+    /**
+     *
+     * @description: 获取动态代理类
+     * @param clazz
+     * @return: 动态代理类
+     * @author: zhangjiayi07
+     * @time: 2021/5/30 2:54 下午
+     */
     public <T> T getProxy(Class<T> clazz) {
         return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[]{clazz}, this);
     }

@@ -37,6 +37,13 @@ public class SpringBeanPostProcessor implements BeanPostProcessor {
     }
 
 
+    /**
+     * （在构造方法执行后,init-method执行前调用）将方法发布至zk
+     * @param bean
+     * @param beanName
+     * @return
+     * @throws BeansException
+     */
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         if (bean.getClass().isAnnotationPresent(RpcService.class)) {
@@ -51,12 +58,20 @@ public class SpringBeanPostProcessor implements BeanPostProcessor {
         return bean;
     }
 
+    /**
+     * init-method后调用，通过代理获取值
+     * @param bean
+     * @param beanName
+     * @return
+     * @throws BeansException
+     */
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         Class<?> beanClass = bean.getClass();
         Field[] declaredFields = beanClass.getDeclaredFields();
         for (Field declaredField : declaredFields) {
             RpcReference rpcReference = declaredField.getAnnotation(RpcReference.class);
+            //只有client中的@RpcReference才会调用动态代理类
             if (rpcReference != null) {
                 RpcServiceParam param = RpcServiceParam.builder()
                         .group(rpcReference.group())
@@ -70,8 +85,6 @@ public class SpringBeanPostProcessor implements BeanPostProcessor {
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
-
-
             }
         }
         return bean;
