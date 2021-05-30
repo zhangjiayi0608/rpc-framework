@@ -11,7 +11,7 @@ import github.zayn.factory.SingletonFactory;
 import github.zayn.model.RpcRequest;
 import github.zayn.registry.ServiceDiscover;
 import github.zayn.registry.impl.ServiceDiscoverImpl;
-import github.zayn.remoting.RpcClient;
+import github.zayn.remoting.Transport;
 
 /**
  * @ClassName SocketRpcClient
@@ -19,7 +19,7 @@ import github.zayn.remoting.RpcClient;
  * @Author zhangjiayi07
  * @Date 2020/12/4 上午10:24
  **/
-public class SocketRpcClient implements RpcClient {
+public class SocketRpcClient implements Transport {
     private final ServiceDiscover serviceDiscover;
 
     public SocketRpcClient() {

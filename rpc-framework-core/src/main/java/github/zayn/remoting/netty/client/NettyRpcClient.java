@@ -8,7 +8,7 @@ import github.zayn.factory.SingletonFactory;
 import github.zayn.model.RpcRequest;
 import github.zayn.model.RpcResponse;
 import github.zayn.registry.ServiceDiscover;
-import github.zayn.remoting.RpcClient;
+import github.zayn.remoting.Transport;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
  * @createTime 2020年05月29日 17:51:00
  */
 @Slf4j
-public final class NettyRpcClient implements RpcClient {
+public final class NettyRpcClient implements Transport {
 
     private final ServiceDiscover serviceDiscover;
 

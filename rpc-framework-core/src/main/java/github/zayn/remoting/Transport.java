@@ -8,7 +8,7 @@ import github.zayn.model.RpcRequest;
  * @Author zhangjiayi07
  * @Date 2020/12/5 下午6:07
  **/
-public interface RpcClient {
+public interface Transport {
 
     Object sendRpcRequest(RpcRequest rpcRequest);
 }

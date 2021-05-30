@@ -8,7 +8,7 @@ import java.util.UUID;
 import github.zayn.entity.RpcServiceParam;
 import github.zayn.model.RpcRequest;
 import github.zayn.model.RpcResponse;
-import github.zayn.remoting.RpcClient;
+import github.zayn.remoting.Transport;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -19,10 +19,10 @@ import lombok.extern.slf4j.Slf4j;
  **/
 @Slf4j
 public class RpcClientProxy implements InvocationHandler {
-    private final RpcClient rpcClient;
+    private final Transport rpcClient;
     private final RpcServiceParam rpcServiceParam;
 
-    public RpcClientProxy(RpcClient rpcClient, RpcServiceParam rpcServiceParam) {
+    public RpcClientProxy(Transport rpcClient, RpcServiceParam rpcServiceParam) {
         this.rpcClient = rpcClient;
         this.rpcServiceParam = rpcServiceParam;
     }
