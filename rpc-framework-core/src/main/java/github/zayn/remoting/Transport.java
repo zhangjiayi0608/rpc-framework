@@ -1,5 +1,7 @@
 package github.zayn.remoting;
 
+import java.io.IOException;
+
 import github.zayn.model.RpcRequest;
 
 /**
@@ -10,5 +12,5 @@ import github.zayn.model.RpcRequest;
  **/
 public interface Transport {
 
-    Object sendRpcRequest(RpcRequest rpcRequest);
+    Object sendRpcRequest(RpcRequest rpcRequest) throws IOException;
 }

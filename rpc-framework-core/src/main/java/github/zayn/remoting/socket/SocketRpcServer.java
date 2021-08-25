@@ -27,8 +27,7 @@ public class SocketRpcServer {
     }
 
     public void start() {
-        try {
-            ServerSocket serverSocket = new ServerSocket();
+        try (ServerSocket serverSocket = new ServerSocket()) {
             String hostAddress = InetAddress.getLocalHost().getHostAddress();
             serverSocket.bind(new InetSocketAddress(hostAddress, PORT));
             Socket socket;
